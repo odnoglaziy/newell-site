@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Start NEWELL project</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <div class="header">
+            <h1 class="site-title">
+                Start NEWELL project
+            </h1>
+            <div class="header-in">
+                <a href="index.html" class="btn">
+                    Home page
+                </a>
+                <a href="support.html" class="btn">
+                    Support me
+                </a>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>WARNING:</strong> Utilities like `curl` or `git` are not mentioned because this guide focuses on installing the Ada programming language and my framework, rather than the tools you might use to work with them. All examples here are shown for the x86_64 architecture. If you are using, for example, ARM64, then choose the packages for aarch64.
+        </div>
+        <div class="start">
+            <h2 class="install-ada">
+                Install ada!
+            </h2>
+            Before you can write code using the NEWELL framework, you will need to install the Ada language and the Alire build system/package manager.
+            This is how it’s done.
+            <h3>Linux</h3>
+            <h4>Archlinux</h4>
+<pre class="sh-ex"><code class="sh-ex-code">sudo pacman -S gcc-ada # install gnat compiler.
+git clone https://aur.archlinux.org/alire-bin # or alire and alire-git
+cd alire-bin
+makepkg -si</code></pre>
+
+You can also use yay, aura, paru, or other AUR helpers.
+<pre class="sh-ex"><code class="sh-ex-code">yay -S alire-bin
+aura -A alire-bin
+paru -S alire-bin</code></pre>
+
+Or you can build it from source yourself.
+<pre class="sh-ex"><code class="sh-ex-code">git clone --recurse-submodules https://github.com/alire-project/alire/
+cd alire
+ALIRE_OS=linux gprbuild -j0 -p -P alr_env.gpr -XALIRE_BUILD_MODE=release
+mkdir -p ~/.local/bin/
+cp bin/alr ~/.local/bin/
+chmod +x ~/.local/bin/alr
+export PATH="$HOME/.local/bin:$PATH</code></pre>
+
+            <h4>Debian (and forks)</h4> // I hate this system btw.
+<pre class="sh-ex"><code class="sh-ex-code">sudo apt install gnat gprbuild
+curl -sLO https://github.com/alire-project/alire/releases/download/v2.1.1/alr-2.1.1-bin-x86_64-linux.zip
+unzip -j alr-2.1.1-bin-x86_64-linux.zip -d ~/.local/bin/
+chmod +x ~/.local/bin/alr
+export PATH="$HOME/.local/bin:$PATH</code></pre>
+
+Or you can build it from source yourself.
+<pre class="sh-ex"><code class="sh-ex-code">git clone --recurse-submodules https://github.com/alire-project/alire/
+cd alire
+ALIRE_OS=linux gprbuild -j0 -p -P alr_env.gpr -XALIRE_BUILD_MODE=release
+mkdir -p ~/.local/bin/
+cp bin/alr ~/.local/bin/
+chmod +x ~/.local/bin/alr
+export PATH="$HOME/.local/bin:$PATH</code></pre>
+
+            <h4>Fedora</h4>
+<pre class="sh-ex"><code class="sh-ex-code">sudo dnf install -y gcc-gnat gprbuild git make gcc-c++
+curl -sLO https://github.com/alire-project/alire/releases/download/v2.1.1/alr-2.1.1-bin-x86_64-linux.zip
+unzip -j alr-2.1.1-bin-x86_64-linux.zip -d ~/.local/bin/
+chmod +x ~/.local/bin/alr
+export PATH="$HOME/.local/bin:$PATH</code></pre>
+
+Or you can build it from source yourself.
+<pre class="sh-ex"><code class="sh-ex-code">git clone --recurse-submodules https://github.com/alire-project/alire/
+cd alire
+ALIRE_OS=linux gprbuild -j0 -p -P alr_env.gpr -XALIRE_BUILD_MODE=release
+mkdir -p ~/.local/bin/
+cp bin/alr ~/.local/bin/
+chmod +x ~/.local/bin/alr
+export PATH="$HOME/.local/bin:$PATH</code></pre>
+
+            <h4>NixOS</h4>
+
+<pre class="sh-ex"><code class="sh-ex-code">nix-shell -p alire gnat gprbuild</code></pre>
+<p>or</p>
+<pre class="sh-ex"><code class="sh-ex-code">nix profile install nixpkgs#alire nixpkgs#gnat nixpkgs#gprbuild</code></pre>
+<p>or add the packages to your <code>/etc/nixos/configuration.nix</code> (you can open it with <code>sudo -e</code> or <code>doas</code> using your favorite editor, such as Neovim):</p>
+
+<pre class="nix-ex"><code class="nix-ex-code">environment.systemPackages = with pkgs; [
+  alire
+  gnat
+  gprbuild
+];</code></pre>
+
+<p>Then rebuild your configuration:</p>
+<pre class="sh-ex"><code class="sh-ex-code">sudo nixos-rebuild switch</code></pre>
+
+            <h3>Windows</h3> // I hate this system too.
+
+<p>Installing Alire</p>
+<pre class="ps-ex"><code class="ps-ex-code">curl.exe -sLO https://github.com/alire-project/alire/releases/download/v2.1.1/alr-2.1.1-bin-x86_64-windows.zip
+Expand-Archive -Path ".\alr-2.1.1-bin-x86_64-windows.zip" -DestinationPath "C:\Alire\" -Force
+
+$userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+if ($userPath -notlike "*C:\Alire\bin*") {
+    [Environment]::SetEnvironmentVariable("Path", "$userPath;C:\Alire\bin", "User")
+}</code></pre>
+
+<p>Reload your terminal, then install the compiler (accept MSYS2 installation if prompted):</p>
+<pre class="ps-ex"><code class="ps-ex-code"># Select gnat_native and gprbuild
+alr toolchain --select</code></pre>
+
+<p>Testing</p>
+<pre class="ps-ex"><code class="ps-ex-code">alr --version
+alr toolchain</code></pre>
+
+            <h3>Mac OS</h3>
+            Installing xcode-tools
+<pre class="sh-ex-mac"><code class="sh-ex-mac-code">sudo xcode-select --install</code></pre>
+            Installing alire
+<pre class="sh-ex-mac"><code class="sh-ex-mac-code">curl -sLO https://github.com/alire-project/alire/releases/download/v2.1.1/alr-2.1.1-bin-x86_64-macos.zip</code></pre>
+        </div>
+    </body>
+</html>

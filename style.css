@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lilex:wght@1,100&display=swap');
+
+* {
+    background-color: #262626;
+    color: #ababab;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+body {
+    margin: 50px 50px 50px 50px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    
+    margin: 20px 0;
+    padding: 16px 24px;
+    border-radius: 12px;
+    
+    background: linear-gradient(135deg, rgba(42, 42, 42, 0.85) 0%, rgba(31, 31, 31, 0.85) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.header-in {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px; 
+    box-sizing: border-box; 
+    width: 100%;
+    
+    background-color: rgba(255, 141, 0, 0.08); 
+    border: 1px solid rgba(255, 141, 0, 0.2); 
+    border-radius: 12px; 
+    
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.site-title {
+    color: #ffffff;
+    margin: 0; 
+    font-size: 24px;
+    font-weight: 700;
+    background-color: transparent;
+}
+
+.btn {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    
+    background-color: #FF8D00;
+    color: #1a1a1a;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    
+    padding: 8px 20px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    
+    box-shadow: 0 4px 14px rgba(255, 141, 0, 0.2);
+}
+
+.btn:hover {
+    background-color: #ff9d26;
+    box-shadow: 0 6px 20px rgba(255, 141, 0, 0.4); /* Тень становится больше и ярче */
+    transform: translateY(-1px);                    /* Кнопка чуть приподнимается */
+}
+
+.btn:active {
+    transform: translateY(1px);                     /* При клике "вдавливается" */
+    box-shadow: 0 2px 8px rgba(255, 141, 0, 0.2);
+}
+
+.note {
+    background-color: rgba(255, 141, 0, 0.12);
+    border: 1px solid rgba(255, 141, 0, 0.35);
+    border-left: 4px solid #FF8D00;
+    padding: 0.85rem 1.1rem;
+    border-radius: 6px;
+    color: #e6edf3;
+    margin: 1.5rem 0;
+}
+
+.note strong {
+    color: #FF8D00;
+    background: transparent;
+}
+
+.sh-ex,
+.nix-ex,
+.sh-ex-mac,
+.ps-ex {
+    background-color: #151515; /* Сделали чуть темнее основного фона для контраста */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Тонкая, аккуратная рамка вместо толстой */
+    border-radius: 8px; /* Мягкие скругления */
+    padding: 16px 20px; /* ДЫШИМ: нормальные внутренние отступы (замена твоему border 5px) */
+    margin: 1.5rem 0; /* Отступы сверху и снизу, чтобы код не прилипал к тексту */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Мягкая, современная тень вместо черной */
+    overflow-x: auto; /* Если строка будет длинной, появится красивый скролл, а не сломанный дизайн */
+}
+
+.sh-ex-code,
+.nix-ex-code,
+.sh-ex-code-mac,
+.ps-ex-code {
+    font-family: 'Lilex', 'JetBrains Mono', 'Fira Code', monospace; /* Добавил запасные шрифты */
+    font-size: 14px; /* Оптимальный размер для чтения кода */
+    font-weight: 400; /* Убрали 100, поставили стандартный читаемый вес */
+    line-height: 1.6; /* Межстрочный интервал — кодовые блоки должны дышать */
+    color: #e6edf3; /* Не чисто белый, а мягкий (как в GitHub), чтобы не резало глаза */
+    
+    background-color: transparent; /* Фон задается контейнером выше */
+    display: block; /* Чтобы текст вел себя как блок */
+    margin: 0;
+    white-space: pre; /* Чтобы пробелы в коде не схлопывались */
+}
